@@ -1,0 +1,15 @@
+{
+  "name": "note",
+  "version": "1.0.0",
+  "description": "note",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lywTYH/note.git"
+  },
+  "author": "LYW",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lywTYH/note/issues"
+  },
+  "homepage": "https://github.com/lywTYH/note#readme"
+}
