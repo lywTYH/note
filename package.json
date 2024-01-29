@@ -7,9 +7,18 @@
     "url": "git+https://github.com/lywTYH/note.git"
   },
   "author": "LYW",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lywTYH/note/issues"
   },
-  "homepage": "https://github.com/lywTYH/note#readme"
+  "homepage": "https://github.com/lywTYH/note#readme",
+  "dependencies": {
+    "install": "^0.13.0",
+    "vitepress": "^1.0.0-rc.32"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  }
 }
