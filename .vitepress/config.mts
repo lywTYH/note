@@ -5,6 +5,7 @@ export default defineConfig({
   description: '笔记',
   lastUpdated: true,
   cleanUrls: true,
+  base: '/note/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -47,4 +48,5 @@ export default defineConfig({
     ],
     // socialLinks: [{icon: 'github', link: 'https://github.com/vuejs/vitepress'}],
   },
+  srcExclude: ['**/node_modules/**', 'browser/**', 'bundler/**'],
 });
