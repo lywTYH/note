@@ -10,26 +10,38 @@ export default defineConfig({
     nav: [
       {text: 'Home', link: '/'},
       {text: 'LeetCode', link: '/leet-code'},
-      {text: 'es', link: '/es/index'},
+      {text: 'es', link: '/es/let-const'},
       {text: 'others', link: '/others'},
     ],
     sidebar: [
       {
         text: 'ES',
-        collapsed:true,
+        collapsed: true,
         items: [
+          {
+            text: 'let 和 const',
+            link: '/es/let-const',
+          },
         ],
       },
       {
         text: 'react',
-        collapsed:true,
+        collapsed: true,
         items: [
+          {
+            text: 'let 和 const',
+            link: '/react/let-const',
+          },
         ],
       },
       {
         text: 'typescript',
-        collapsed:true,
+        collapsed: true,
         items: [
+          {
+            text: 'let 和 const',
+            link: '/ts/index',
+          },
         ],
       },
     ],
