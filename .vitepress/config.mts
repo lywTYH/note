@@ -12,7 +12,7 @@ export default defineConfig({
       {text: 'Home', link: '/'},
       {text: 'LeetCode', link: '/leet-code'},
       {text: 'es', link: '/es/let-const'},
-      {text: 'others', link: '/others'},
+      {text: 'others', link: '/others/macroTaskAndMicroTask'},
     ],
     sidebar: [
       {
@@ -42,6 +42,20 @@ export default defineConfig({
           {
             text: 'let 和 const',
             link: '/ts/index',
+          },
+        ],
+      },
+      {
+        text: 'Others',
+        collapsed: true,
+        items: [
+          {
+            text: '微任务和宏任务',
+            link: '/others/macroTaskAndMicroTask',
+          },
+          {
+            text: 'Git',
+            link: '/others/git',
           },
         ],
       },
