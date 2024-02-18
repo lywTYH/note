@@ -1,40 +1,50 @@
 import {defineConfig} from 'vitepress';
+import {DefaultTheme} from 'vitepress/types/default-theme';
+import jsRouter from '../javascript/router';
+import reactRouter from '../react/router';
+import othersRouter from '../others/router';
 // https://vitepress.dev/reference/site-config
+
+const getNavConfigByRouter = (router: DefaultTheme.SidebarItem, prefix = '') => {
+  if (!router.items) {
+    return;
+  }
+  let item = router.items[0];
+  if (Array.isArray(item.items)) {
+    return getNavConfigByRouter(
+      {
+        ...item,
+        text: router.text,
+      },
+      prefix + (router.base || ''),
+    );
+  }
+  return {
+    text: router.text,
+    link: `${prefix}${router.base || ''}${item.link}`,
+  };
+};
+
+const navRouters = [
+  {text: 'Home', link: '/'},
+  {text: 'LeetCode', link: '/leet-code'},
+  getNavConfigByRouter(jsRouter),
+  {text: 'others', link: '/others/macroTaskAndMicroTask'},
+].filter((v) => v !== undefined) as DefaultTheme.NavItem[];
+
 export default defineConfig({
   title: '笔记',
   description: '笔记',
   lastUpdated: true,
   cleanUrls: true,
   base: '/note/',
+  titleTemplate: ':title - 笔记',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      {text: 'Home', link: '/'},
-      {text: 'LeetCode', link: '/leet-code'},
-      {text: 'es', link: '/es/let-const'},
-      {text: 'others', link: '/others/macroTaskAndMicroTask'},
-    ],
+    nav: navRouters,
     sidebar: [
-      {
-        text: 'ES',
-        collapsed: true,
-        items: [
-          {
-            text: 'let 和 const',
-            link: '/es/let-const',
-          },
-        ],
-      },
-      {
-        text: 'react',
-        collapsed: true,
-        items: [
-          {
-            text: 'let 和 const',
-            link: '/react/let-const',
-          },
-        ],
-      },
+      jsRouter,
+      reactRouter,
       {
         text: 'typescript',
         collapsed: true,
@@ -45,20 +55,7 @@ export default defineConfig({
           },
         ],
       },
-      {
-        text: 'Others',
-        collapsed: true,
-        items: [
-          {
-            text: '微任务和宏任务',
-            link: '/others/macroTaskAndMicroTask',
-          },
-          {
-            text: 'Git',
-            link: '/others/git',
-          },
-        ],
-      },
+      othersRouter,
     ],
     // socialLinks: [{icon: 'github', link: 'https://github.com/vuejs/vitepress'}],
   },

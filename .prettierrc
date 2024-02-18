@@ -6,7 +6,17 @@
   "overrides": [
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {"parser": "json"}
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 80,
+        "proseWrap": "always",
+        "tabWidth": 2,
+        "useTabs": false,
+        "parser": "markdown"
+      }
     }
   ]
 }
