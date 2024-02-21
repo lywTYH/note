@@ -2,7 +2,6 @@ import {DefaultTheme} from 'vitepress/types/default-theme';
 
 const router: DefaultTheme.SidebarItem = {
   text: 'Others',
-  collapsed: true,
   base: '/others',
   items: [
     {
@@ -16,6 +15,19 @@ const router: DefaultTheme.SidebarItem = {
         {
           text: 'Git commit message规范',
           link: '/commit',
+        },
+      ],
+    },
+    {
+      text: '微前端',
+      items: [
+        {
+          text: '引言',
+          link: '/micro-frontend/instruction',
+        },
+        {
+          text: 'qiankun',
+          link: '/micro-frontend/qiankun',
         },
       ],
     },
