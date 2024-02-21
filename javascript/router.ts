@@ -1,7 +1,6 @@
 import {DefaultTheme} from 'vitepress/types/default-theme';
 const es6Router = {
   text: 'ES6',
-  collapsed: true,
   items: [
     {
       text: 'let 和 const',
@@ -31,7 +30,6 @@ const es6Router = {
 };
 const polyfillRouter = {
   text: 'polyfill',
-  collapsed: true,
   items: [
     {
       text: 'extend',
@@ -46,7 +44,6 @@ const polyfillRouter = {
 
 const router: DefaultTheme.SidebarItem = {
   text: 'JavaScript',
-  collapsed: true,
   base: '/javascript',
   items: [es6Router, polyfillRouter],
 };

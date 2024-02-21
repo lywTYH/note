@@ -62,7 +62,7 @@ fetch 方法来获取子应用对应的 html 内容字符串，然后解析 html
 式、js 脚本，安装样式并执行 js 脚本来获取子应用的生命周期方法，然后执行子应用的
 mount 方法。
 
-## js 隔离
+### js 隔离
 
 qiankun 提供沙盒(sandbox) 实现 js 隔离。
 
@@ -74,11 +74,14 @@ qiankun 实现 sandbox 的原理其实很好理解，简单来说就是：
    用在类 window 对象上；在这一步，html entry 阶段解析出来的所有 js 脚本字符串在
    执行时会先使用一个 IIFE - 立即执行函数包裹，然后通过 eval 方法手动触发，如下
    ：
-   ``js var fakeWindowA = {name: 'appA'}; // 子应用 appA 对应的类 window 对象 var fakeWindowB = {name: 'appB'}; // 子应用 appB 对应的类 window 对象 var jsStr = 'console.log(name)'; // 子应用 appA、appB 的都有的脚本字符串 var codeA = `(function(window){with(window){${jsStr}}})(fakeWindowA)`;
+   ```js
+   var fakeWindowA = {name: 'appA'}; // 子应用 appA 对应的类 window 对象
+   var fakeWindowB = {name: 'appB'}; // 子应用 appB 对应的类 window 对象
+   var jsStr = 'console.log(name)'; // 子应用 appA、appB 的都有的脚本字符串
+   var codeA = `(function(window){with(window){${jsStr}}})(fakeWindowA)`;
    var codeB = `(function(window){with(window){${jsStr}}})(fakeWindowB)`;
-   eval(codeA); // appA eval(codeB); // appB
-   ```
-
+   eval(codeA); // appA
+   eval(codeB); // appB
    ```
 
 qiankun 在实现 sandbox 时，先构建一个空对象 - fakeWindow 作为一个假的 window 对
@@ -133,7 +136,7 @@ class ProxySandbox {
 }
 ```
 
-## css 隔离
+### css 隔离
 
 1. 严格样式隔离，是基于 Web Component 的 shadow Dom 实现的。通过 shadow Dom, 我
    们可以将一个隐藏的、独立的 dom 附加到一个另一个 dom 元素上，保证元素的私有化
@@ -145,7 +148,7 @@ class ProxySandbox {
    部样式表中的样式添加 div["data-qiankun=xxx"] 前缀。qiankun 中子应用的 name 属
    性值是唯一的，这样通过属性选择器的限制，就可实现样式隔离。
 
-## 子应用卸载副作用清理
+### 子应用卸载副作用清理
 
 每个子应用在工作过程中，或多或少都会产生一些副作用，如 setInterval 生成的定时器
 、widnow.addEventListener 注册的事件、修改全局变量 window、动态添加 dom 节点等。
@@ -158,7 +161,7 @@ class ProxySandbox {
 2. window.addEventListener 引发的副作用，qiankun 也是通过劫持原生的
    window.addEventListener、window.removeEventListener 来处理的
 
-## 子应用重新挂载状态恢复
+### 子应用重新挂载状态恢复
 
 在实际的微前端项目中，我们除了要在子应用卸载时清除副作用，还需要在子应用重新挂载
 时恢复子应用的状态。
@@ -168,7 +171,7 @@ class ProxySandbox {
 1. 子应用修改的全局变量；
 2. 子应用动态添加的 style；
 
-## 子应用通信
+### 子应用通信
 
 qiankun 提供的 通信机制 是基于发布订阅模式实现的。主应用通过 initGlobalState 方
 法创建一个全局的 globalState，并维护一个 deps 列表来收集订阅。订阅方法

@@ -5,26 +5,6 @@ import reactRouter from '../react/router';
 import othersRouter from '../others/router';
 // https://vitepress.dev/reference/site-config
 
-const getNavConfigByRouter = (router: DefaultTheme.SidebarItem, prefix = '') => {
-  if (!router.items) {
-    return;
-  }
-  let item = router.items[0];
-  if (Array.isArray(item.items)) {
-    return getNavConfigByRouter(
-      {
-        ...item,
-        text: router.text,
-      },
-      prefix + (router.base || ''),
-    );
-  }
-  return {
-    text: router.text,
-    link: `${prefix}${router.base || ''}${item.link}`,
-  };
-};
-
 const navRouters = [
   {text: 'Home', link: '/'},
   {text: 'LeetCode', link: '/leet-code'},
@@ -39,6 +19,7 @@ export default defineConfig({
   cleanUrls: true,
   base: '/note/',
   titleTemplate: ':title - 笔记',
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: navRouters,
@@ -56,8 +37,42 @@ export default defineConfig({
         ],
       },
       othersRouter,
-    ],
+    ].map(routerWithBasicSetting),
+    outline: {
+      level: [2, 6],
+      label: '目录',
+    },
     // socialLinks: [{icon: 'github', link: 'https://github.com/vuejs/vitepress'}],
   },
   srcExclude: ['**/node_modules/**', 'browser/**', 'bundler/**'],
 });
+
+function getNavConfigByRouter(router: DefaultTheme.SidebarItem, prefix = '') {
+  if (!router.items) {
+    return;
+  }
+  let item = router.items[0];
+  if (Array.isArray(item.items)) {
+    return getNavConfigByRouter(
+      {
+        ...item,
+        text: router.text,
+      },
+      prefix + (router.base || ''),
+    );
+  }
+  return {
+    text: router.text,
+    link: `${prefix}${router.base || ''}${item.link}`,
+  };
+}
+
+function routerWithBasicSetting(router: DefaultTheme.SidebarItem) {
+  if (router.items && Array.isArray(router.items)) {
+    if (router.collapsed === undefined) {
+      router.collapsed = true;
+    }
+    router.items = router.items.map((item) => (item ? routerWithBasicSetting(item) : item));
+  }
+  return router;
+}
