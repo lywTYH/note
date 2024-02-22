@@ -5,16 +5,32 @@ const router: DefaultTheme.SidebarItem = {
   base: '/others',
   items: [
     {
-      text: '微任务和宏任务',
-      link: '/macroTaskAndMicroTask',
+      text: '杂类',
+      items: [
+        {
+          text: 'css',
+          link: '/css',
+        },
+        {
+          text: '浏览器',
+          link: '/browser',
+        },
+        {
+          text: 'webpack',
+          link: '/webpack',
+        },
+        {
+          text: '微任务和宏任务',
+          link: '/macroTaskAndMicroTask',
+        },
+      ],
     },
     {
       text: 'Git',
-      base: '/git',
       items: [
         {
           text: 'Git commit message规范',
-          link: '/commit',
+          link: '/git/commit',
         },
       ],
     },
@@ -33,5 +49,6 @@ const router: DefaultTheme.SidebarItem = {
     },
   ],
 };
+const nav = {text: 'Others', link: '/others/macroTaskAndMicroTask', activeMatch: '^/others/'};
 
-export default router;
+export default {router, nav};
