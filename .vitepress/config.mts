@@ -19,7 +19,14 @@ export default defineConfig({
   cleanUrls: true,
   base: '/note/',
   titleTemplate: ':title - 笔记',
-
+  head: [
+    ['link', {rel: 'icon', href: '/note/favicon.ico'}],
+    ['link', {rel: 'manifest', href: '/note/manifest.json'}],
+    ['meta', {name: 'author', content: 'lyw'}],
+    ['meta', {name: 'keywords', content: 'lyw, note, 笔记'}],
+    ['meta', {name: 'description', content: '笔记'}],
+    ['meta', {name: 'viewport', content: 'width=device-width, initial-scale=1.0'}],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: navRouters,
